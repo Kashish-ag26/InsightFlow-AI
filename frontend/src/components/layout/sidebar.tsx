@@ -11,7 +11,6 @@ import {
   TrendingUp,
   BarChart3,
   Bookmark,
-  Calendar,
   Settings,
   ShieldCheck,
   X
@@ -34,7 +33,6 @@ const mainNav: NavItem[] = [
 
 const workspaceNav: NavItem[] = [
   { name: "Bookmarks", href: "/bookmarks", icon: Bookmark },
-  { name: "Scheduled", href: "/scheduled-posts", icon: Calendar },
   { name: "Settings", href: "/settings", icon: Settings },
   { name: "Admin", href: "/admin", icon: ShieldCheck },
 ];
