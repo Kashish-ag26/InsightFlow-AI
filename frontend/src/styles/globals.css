@@ -1,0 +1,140 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --background: 40 20% 98%; /* #fbfaf8 cream */
+    --foreground: 60 2% 16%; /* #2c2c2a near-black */
+
+    --card: 0 0% 100%; /* #ffffff pure white */
+    --card-foreground: 60 2% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 2% 16%;
+
+    --primary: 13 72% 17%; /* #4a1b0c dark maroon */
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 38 20% 92%; /* #f0ece4 soft warm tint */
+    --secondary-foreground: 60 2% 16%;
+
+    --muted: 40 10% 94%;
+    --muted-foreground: 40 4% 52%; /* #8a8880 muted warm gray */
+
+    --accent: 15 67% 52%; /* #d85a30 soft coral */
+    --accent-foreground: 0 0% 100%;
+
+    --border: 38 15% 91%; /* #ece9e3 hairline warm gray */
+    --input: 38 15% 91%;
+    --ring: 13 72% 17%;
+
+    --radius: 0.6rem; /* 10px rounded corners */
+  }
+
+  .dark {
+    --background: 40 6% 10%; /* #1c1b18 dark warm */
+    --foreground: 40 20% 96%; /* #fbfaf8 cream */
+
+    --card: 40 6% 12%;
+    --card-foreground: 40 20% 96%;
+
+    --popover: 40 6% 12%;
+    --popover-foreground: 40 20% 96%;
+
+    --primary: 40 20% 96%;
+    --primary-foreground: 40 6% 10%;
+
+    --secondary: 40 6% 16%;
+    --secondary-foreground: 40 20% 96%;
+
+    --muted: 40 6% 16%;
+    --muted-foreground: 40 4% 60%;
+
+    --accent: 15 67% 52%;
+    --accent-foreground: 40 20% 96%;
+
+    --border: 40 6% 18%;
+    --input: 40 6% 18%;
+    --ring: 40 20% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans selection:bg-amber-100 selection:text-amber-900;
+  }
+  .font-serif-title {
+    font-family: 'Newsreader', Georgia, Cambria, serif;
+    font-weight: 400;
+  }
+}
+
+/* Notion AI Style Utility Classes */
+.notion-card {
+  background-color: #ffffff;
+  border: 1px solid #ece9e3;
+  border-radius: 0.625rem; /* 10px */
+}
+
+.dark .notion-card {
+  background-color: #242320;
+  border: 1px solid #33312c;
+}
+
+/* News Card Elevation Micro-interaction */
+.news-elevate-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+.news-elevate-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(44, 44, 42, 0.08), 0 4px 10px -2px rgba(44, 44, 42, 0.04);
+}
+
+.notion-pill-badge {
+  background-color: #faece7;
+  color: #4a1b0c;
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+}
+
+.notion-nav-active {
+  background-color: #f0ece4;
+  color: #2c2c2a;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.dark .notion-nav-active {
+  background-color: #2e2c28;
+  color: #fbfaf8;
+}
+
+/* Custom Minimal Smooth Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 175, 165, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 135, 125, 0.6);
+}
