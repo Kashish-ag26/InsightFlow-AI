@@ -15,7 +15,6 @@ InsightFlow is an autonomous, multi-agent AI SaaS platform designed for tech fou
 4. **Deep AI Research:** Gemini-powered technical synthesis, pros/cons, simple & business summaries.
 5. **Pinecone RAG Knowledge Base:** High-dimensional vector indexing enabling natural language query answering.
 6. **Analytics & Performance Tracking:** Track reach, engagement, CTR, and top sources in real-time.
-
 ---
 
 ## 🚀 Quick Start Guide
