@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Search, Sparkles, Bell, Sun, Moon, X } from "lucide-react";
+import { Search, Sparkles, Bell, Sun, Moon, X, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const mockNotifications = [
@@ -11,7 +11,11 @@ const mockNotifications = [
   { id: "3", title: "Cyber Security Summit Concludes", time: "40m ago" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  onMenuClick: () => void;
+}
+
+export function Navbar({ onMenuClick }: NavbarProps) {
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -27,31 +31,43 @@ export function Navbar() {
   };
 
   return (
-    <header className="h-16 px-6 bg-[#fbfaf8] dark:bg-[#1c1b18] flex items-center justify-between border-b border-[#ece9e3] dark:border-zinc-800 text-[#2c2c2a] dark:text-[#fbfaf8]">
-      {/* Section Title (The ONE Serif Element ~24-26px) */}
-      <h1 className="font-serif text-2xl font-normal text-[#2c2c2a] dark:text-[#fbfaf8] tracking-tight capitalize">
-        {getSectionTitle(pathname)}
-      </h1>
-
-      {/* Right Controls: Bordered White Search + Solid Dark Maroon "Ask AI" */}
+    <header className="h-16 px-4 sm:px-6 bg-[#fbfaf8] dark:bg-[#1c1b18] flex items-center justify-between border-b border-[#ece9e3] dark:border-zinc-800 text-[#2c2c2a] dark:text-[#fbfaf8]">
+      {/* Mobile Hamburger + Page Title Group */}
       <div className="flex items-center gap-3">
-        {/* Search Pill Button */}
-        <div className="relative hidden md:block">
+        {/* Menu Icon for Mobile Drawer Toggle */}
+        <button
+          onClick={onMenuClick}
+          className="p-1.5 -ml-1 rounded-lg hover:bg-[#f5f2eb] dark:hover:bg-zinc-800 text-[#8a8880] hover:text-[#2c2c2a] md:hidden transition-colors"
+          title="Open menu"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        {/* Section Title */}
+        <h1 className="font-serif text-xl sm:text-2xl font-normal text-[#2c2c2a] dark:text-[#fbfaf8] tracking-tight capitalize truncate">
+          {getSectionTitle(pathname)}
+        </h1>
+      </div>
+
+      {/* Right Controls */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Search Pill Button (Hidden on very small screens) */}
+        <div className="relative hidden lg:block">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#8a8880]" />
           <input
             type="text"
             placeholder="Search news, topics, RAG..."
-            className="h-8 pl-8 pr-4 w-52 rounded-full border border-[#ece9e3] dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs text-[#2c2c2a] dark:text-[#fbfaf8] placeholder:text-[#8a8880] focus:outline-none focus:border-[#4a1b0c]"
+            className="h-8 pl-8 pr-4 w-44 xl:w-52 rounded-full border border-[#ece9e3] dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs text-[#2c2c2a] dark:text-[#fbfaf8] placeholder:text-[#8a8880] focus:outline-none focus:border-[#4a1b0c]"
           />
         </div>
 
         {/* Solid Dark Maroon "Ask AI" Button */}
         <Button
           size="sm"
-          className="bg-[#4a1b0c] hover:bg-[#381409] text-[#fbfaf8] rounded-full text-xs font-medium px-4 gap-1.5 border border-[#4a1b0c]"
+          className="bg-[#4a1b0c] hover:bg-[#381409] text-[#fbfaf8] rounded-full text-xs font-medium px-3 sm:px-4 gap-1.5 border border-[#4a1b0c] h-8"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#fbfaf8]" />
-          <span>Ask AI</span>
+          <span className="hidden sm:inline">Ask AI</span>
         </Button>
 
         {/* Theme Toggle */}
@@ -66,7 +82,7 @@ export function Navbar() {
           {isDark ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-700" />}
         </button>
 
-        {/* Notification Bell Dropdown */}
+        {/* Notification Bell */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -77,7 +93,7 @@ export function Navbar() {
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-72 p-4 bg-white dark:bg-zinc-900 border border-[#ece9e3] dark:border-zinc-800 rounded-xl shadow-xl z-50 space-y-3">
+            <div className="absolute right-0 mt-2 w-64 sm:w-72 p-4 bg-white dark:bg-zinc-900 border border-[#ece9e3] dark:border-zinc-800 rounded-xl shadow-xl z-50 space-y-3">
               <div className="flex items-center justify-between border-b border-[#ece9e3] dark:border-zinc-800 pb-2">
                 <span className="text-xs font-semibold text-[#2c2c2a] dark:text-[#fbfaf8]">
                   Wire Alerts
