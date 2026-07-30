@@ -35,63 +35,74 @@ export function DeepResearchModal({ isOpen, onClose, article }: DeepResearchModa
   // Clean the title for clean sentence injection (remove trailing dates or extra sources)
   const cleanTitle = article.title.replace(/\s*[•|(-]\s*.*$/, "").trim();
 
-  // Dynamic Domain & Article Personalized Mechanics Generator
+  // Dynamic Domain & Article Personalized Mechanics Generator (Strict Category Prioritization)
   const getDomainBreakdown = () => {
     const title = cleanTitle.toLowerCase();
     const cat = article.category.toLowerCase();
     const source = article.source;
 
-    if (cat.includes("politic") || title.includes("farmer") || title.includes("parliament") || title.includes("court") || title.includes("bill") || title.includes("election")) {
+    // Check CATEGORY FIRST to ensure perfect domain alignment
+    if (cat.includes("politic")) {
       return `Legislative Policy & Reform Mechanics: Operational assessment of "${cleanTitle}" reveals key regulatory adjustments in state procurement schedules, statutory price floor enforcement, and administrative council frameworks reported by ${source}.`;
     }
-    if (cat.includes("tech") || title.includes("ai") || title.includes("claude") || title.includes("openai") || title.includes("model") || title.includes("chip") || title.includes("quantum")) {
+    if (cat.includes("tech")) {
       return `System Architecture & Algorithmic Mechanics: Technical analysis of "${cleanTitle}" details advancements in mixture-of-experts (MoE) routing, zero-shot inference latency, and parallel GPU/TPU tensor pipeline optimizations validated by ${source}.`;
     }
-    if (cat.includes("defense") || cat.includes("war") || title.includes("drone") || title.includes("radar") || title.includes("military") || title.includes("cyber") || title.includes("naval")) {
+    if (cat.includes("war") || cat.includes("defense")) {
       return `Tactical Avionics & Security Mechanics: Telemetry audit for "${cleanTitle}" outlines frequency-hopping communications, phased-array radar integration, and autonomous drone threat mitigation protocols verified by ${source}.`;
     }
-    if (cat.includes("stock") || cat.includes("finance") || title.includes("sensex") || title.includes("nifty") || title.includes("bank") || title.includes("bond") || title.includes("sebi") || title.includes("yield")) {
+    if (cat.includes("stock") || cat.includes("finance")) {
       return `Capital Market & Liquidity Mechanics: Financial modeling of "${cleanTitle}" tracks high-frequency delta positioning, mutual fund asset rebalancing, and T+0 margin clearing cycles analyzed by ${source}.`;
     }
-    if (cat.includes("sport") || title.includes("t20") || title.includes("cricket") || title.includes("grand slam") || title.includes("match") || title.includes("player")) {
+    if (cat.includes("sport")) {
       return `Athletic Performance & Analytical Mechanics: Telemetry evaluation of "${cleanTitle}" measures high-intensity biometric strain, launch-angle precision metrics, and tactical player rotation algorithms covered by ${source}.`;
     }
-    if (cat.includes("fashion") || title.includes("wearable") || title.includes("textile") || title.includes("design") || title.includes("fabric") || title.includes("dye")) {
+    if (cat.includes("fashion") || cat.includes("lifestyle")) {
       return `Smart Textile & Algorithmic Weave Mechanics: Material science review for "${cleanTitle}" shows bio-cellulose fiber extraction, 3D digital pattern draping, and zero-waste Jacquard loom execution verified by ${source}.`;
     }
-    if (cat.includes("industry") || cat.includes("energy") || title.includes("hydrogen") || title.includes("solar") || title.includes("grid") || title.includes("ev") || title.includes("factory")) {
+    if (cat.includes("industry") || cat.includes("energy")) {
       return `Industrial Automation & Energy Mechanics: Engineering audit of "${cleanTitle}" demonstrates smart grid dynamic load balancing, green hydrogen electrolysis efficiency, and automated EV cell packing parameters reported by ${source}.`;
+    }
+
+    // Fallback keyword checks if category string is unmapped
+    if (title.includes("farmer") || title.includes("parliament") || title.includes("election")) {
+      return `Legislative Policy & Reform Mechanics: Operational assessment of "${cleanTitle}" reveals key regulatory adjustments reported by ${source}.`;
+    }
+    if (title.includes("ai") || title.includes("claude") || title.includes("model")) {
+      return `System Architecture & Algorithmic Mechanics: Technical analysis of "${cleanTitle}" details GPU/TPU pipeline optimizations validated by ${source}.`;
     }
     return `Operational Execution Mechanics: Technical analysis of "${cleanTitle}" details localized deployment guidelines, safety protocols, and operational parameters verified via ${source}.`;
   };
 
-  // Dynamic Socio-Economic Impact Generator
+  // Dynamic Socio-Economic Impact Generator (Strict Category Prioritization)
   const getBusinessImpact = () => {
     const title = cleanTitle.toLowerCase();
     const cat = article.category.toLowerCase();
     const source = article.source;
 
-    if (cat.includes("politic") || title.includes("farmer") || title.includes("parliament") || title.includes("court") || title.includes("bill")) {
+    // Check CATEGORY FIRST to ensure perfect domain alignment
+    if (cat.includes("politic")) {
       return `Socio-Economic & Policy Impact: Implementation of "${cleanTitle}" alters regional wholesale pricing, stabilizes rural household cash flows, and adjusts state budget allocations, per economic dispatches from ${source}.`;
     }
-    if (cat.includes("tech") || title.includes("ai") || title.includes("claude") || title.includes("openai") || title.includes("model")) {
+    if (cat.includes("tech")) {
       return `Commercial & Developer Economic Impact: Deployment of "${cleanTitle}" drives a 35% reduction in code iteration overhead, accelerates enterprise software release velocity, and increases cloud CAPEX investment, per ${source}.`;
     }
-    if (cat.includes("defense") || cat.includes("war") || title.includes("drone") || title.includes("military") || title.includes("cyber")) {
+    if (cat.includes("war") || cat.includes("defense")) {
       return `Geopolitical & Supply Chain Impact: Development of "${cleanTitle}" lowers maritime insurance premiums across strategic corridors, expands domestic defense manufacturing contracts, and strengthens border trade security, per ${source}.`;
     }
-    if (cat.includes("stock") || cat.includes("finance") || title.includes("sensex") || title.includes("nifty") || title.includes("bank") || title.includes("sebi")) {
+    if (cat.includes("stock") || cat.includes("finance")) {
       return `Capital & Market Valuation Impact: Financial market surge around "${cleanTitle}" boosts retail portfolio liquidity, lowers corporate debt refinancing rates, and attracts $1.8B+ in foreign institutional inflows, per ${source}.`;
     }
-    if (cat.includes("sport") || title.includes("t20") || title.includes("cricket") || title.includes("grand slam")) {
+    if (cat.includes("sport")) {
       return `Media & Commercial Franchise Impact: Coverage of "${cleanTitle}" expands broadcast rights valuations, surges stadium ticketing and merchandise revenue, and boosts regional youth academy sponsorships, per ${source}.`;
     }
-    if (cat.includes("fashion") || title.includes("wearable") || title.includes("textile") || title.includes("design")) {
+    if (cat.includes("fashion") || cat.includes("lifestyle")) {
       return `Sustainable Commerce & Artisanal Impact: Launch of "${cleanTitle}" secures fair-trade contracts for regional weavers, reduces fast-fashion industrial waste by 92%, and accelerates eco-label consumer adoption, per ${source}.`;
     }
-    if (cat.includes("industry") || cat.includes("energy") || title.includes("hydrogen") || title.includes("solar") || title.includes("grid")) {
+    if (cat.includes("industry") || cat.includes("energy")) {
       return `Industrial Efficiency & Decarbonization Impact: Rollout of "${cleanTitle}" reduces industrial manufacturing energy tariffs by 18%, lowers EV fleet total cost of ownership, and expands carbon credit trade volumes, per ${source}.`;
     }
+
     return `Market & Regional Industry Impact: "${cleanTitle}" shifts vendor supply commitments, optimizes project delivery timelines, and enhances capital ROI parameters, as reported by ${source}.`;
   };
 
